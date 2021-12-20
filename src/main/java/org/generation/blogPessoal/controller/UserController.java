@@ -1,12 +1,13 @@
 package org.generation.blogPessoal.controller;
 
-import java.util.Optional;
+import javax.validation.Valid;
 
-import org.generation.blogPessoal.model.UserLogin;
 import org.generation.blogPessoal.model.UsuarioModel;
+import org.generation.blogPessoal.model.dtos.UsuarioCredentialsDTO;
+import org.generation.blogPessoal.model.dtos.UsuarioLoginDTO;
+import org.generation.blogPessoal.model.dtos.UsuarioSignUpDTO;
 import org.generation.blogPessoal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +23,13 @@ public class UserController {
 	@Autowired
 	private UserService usuarioService;
 	
-	@PostMapping("/logar")
-	public ResponseEntity<UserLogin> Authentication(@RequestBody Optional<UserLogin> user){ 
-		return usuarioService.logar(user).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	@PostMapping("/login")
+	 public ResponseEntity<UsuarioCredentialsDTO> logar (@Valid @RequestBody UsuarioLoginDTO usuario){
+        return usuarioService.logarUsuario(usuario);
 	}
-	@PostMapping("/cadastrar")
-	public ResponseEntity<UsuarioModel> Post(@RequestBody UsuarioModel usuario){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioService.cadastrarUsuario(usuario));
-	}
+	@PostMapping("/signup")
+	public ResponseEntity<UsuarioModel> cadastrar(@Valid @RequestBody UsuarioSignUpDTO novoUsuario){
+        return usuarioService.cadastrarUsuario(novoUsuario);
+    }
+	
 }
