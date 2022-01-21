@@ -21,7 +21,7 @@ public class UserService {
 
 	private @Autowired UsuarioRepository repository;
 	private UsuarioModel usuario;
-	private UsuarioCredentialsDTO credencias;
+	private UsuarioCredentialsDTO credenciais;
 
 	private static String encriptarSenha(String senha) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -58,13 +58,18 @@ public class UserService {
 		return repository.findByEmail(usuario.getEmail()).map(resp -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			if (encoder.matches(usuario.getSenha(), resp.getSenha())) {
-				credencias = new UsuarioCredentialsDTO();
-				credencias.setId(resp.getId());
-				credencias.setEmail(resp.getEmail());
-				credencias.setToken(resp.getToken());
-				credencias.setTokenBasic(geradorTokenBasic(usuario.getEmail(), usuario.getSenha()));
+				credenciais = new UsuarioCredentialsDTO();
+				credenciais.setId(resp.getId());
+				credenciais.setEmail(resp.getEmail());
+				credenciais.setToken(resp.getToken());
+				credenciais.setTokenBasic(geradorTokenBasic(usuario.getEmail(), usuario.getSenha()));
+				
+				credenciais.setNome(resp.getNome());
+				credenciais.setFoto(resp.getFoto());
+				credenciais.setTipoUsuario(resp.getTipoUsuario());
+				
 
-				return ResponseEntity.status(200).body(credencias);
+				return ResponseEntity.status(200).body(credenciais);
 			} else {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta");
 			}
