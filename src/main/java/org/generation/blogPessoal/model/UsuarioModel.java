@@ -28,6 +28,10 @@ public class UsuarioModel {
 
 	private String token;
 
+	private String foto;
+
+	private String tipoUsuario;
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<PostagemModel> postagem;
@@ -78,6 +82,22 @@ public class UsuarioModel {
 
 	public void setPostagem(List<PostagemModel> postagem) {
 		this.postagem = postagem;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 }

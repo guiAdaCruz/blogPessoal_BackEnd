@@ -6,6 +6,11 @@ public class UsuarioCredentialsDTO {
 	private String email;
 	private String token;
 	private String tokenBasic;
+	
+	private String nome;
+	private String foto;
+	private String tipoUsuario;
+	
 
 	public UsuarioCredentialsDTO() {
 	}
@@ -47,4 +52,29 @@ public class UsuarioCredentialsDTO {
 	public void setTokenBasic(String tokenBasic) {
 		this.tokenBasic = tokenBasic;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }
